@@ -1,0 +1,7 @@
+<li id="user-{{ .ID }}">
+    {{ .Name }}
+    <button hx-delete="/users/{{ .ID }}" hx-target="#user-{{ .ID }}" hx-swap="delete">
+        Excluir
+    </button>
+</li>
+
