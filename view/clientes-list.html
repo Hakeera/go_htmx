@@ -1,0 +1,12 @@
+<div id="client-list">
+    {{range .clients}}
+    <div>
+        <p><strong>Nome:</strong> {{.Name}}</p>
+        <p><strong>Email:</strong> {{.Email}}</p>
+        <p><strong>Telefone:</strong> {{.Phone}}</p>
+        <p><strong>Endereço:</strong> {{.Address}}</p>
+        <hr>
+    </div>
+    {{end}}
+</div>
+

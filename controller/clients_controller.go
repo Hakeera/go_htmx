@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -10,36 +11,36 @@ import (
 
 // Função para criar um cliente
 func CreateClient(c *gin.Context) {
-	var client service.ClientDTO
+    var client service.ClientDTO
 
-	// Bind JSON do corpo da requisição para a struct client
-	if err := c.ShouldBindJSON(&client); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Erro ao processar a requisição"})
-		return
-	}
+    fmt.Println("🔵 Recebendo requisição para criar cliente...")
 
-	// Chamar o service para criar o cliente
-	createdClient, err := service.CreateClientService(client)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erro ao criar cliente"})
-		return
-	}
+    if err := c.ShouldBind(&client); err != nil {
+        fmt.Println("🛑 Erro ao processar a requisição:", err)
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Erro ao processar a requisição"})
+        return
+    }
 
-	c.JSON(http.StatusOK, gin.H{"message": "Cliente criado com sucesso", "client": createdClient})
+    fmt.Println("✅ Cliente recebido:", client)
+    
+    _, err := service.CreateClientService(client)
+    if err != nil {
+        fmt.Println("🛑 Erro ao criar cliente:", err)
+        c.JSON(http.StatusInternalServerError, gin.H{"error": "Erro ao criar cliente"})
+        return
+    }
+
+    clients, err := service.GetClientsService()
+    if err != nil {
+        fmt.Println("🛑 Erro ao buscar clientes:", err)
+        c.JSON(http.StatusInternalServerError, gin.H{"error": "Erro ao buscar clientes"})
+        return
+    }
+
+    c.HTML(http.StatusOK, "clientes-list.html", gin.H{"clients": clients})
 }
 
 // Função para obter todos os clientes
-func GetClients(c *gin.Context) {
-	clients, err := service.GetClientsService()
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erro ao obter clientes"})
-		return
-	}
-
-	c.JSON(http.StatusOK, clients)
-}
-
-// Função para atualizar um cliente
 func UpdateClient(c *gin.Context) {
 	id := c.Param("id")
 	var client service.ClientDTO
@@ -91,3 +92,14 @@ func DeleteClient(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "Cliente deletado com sucesso"})
 }
 
+// Função para obter todos os clientes
+func GetClients(c *gin.Context) {
+	clients, err := service.GetClientsService()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erro ao buscar clientes"})
+		return
+	}
+
+	// Retorna os clientes como resposta
+	c.JSON(http.StatusOK, clients)
+}

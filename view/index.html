@@ -3,38 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD com HTMX</title>
+    <title>Página Inicial</title>
     <script src="https://unpkg.com/htmx.org@1.7.0"></script> <!-- Incluindo HTMX -->
 </head>
 <body>
-    <h1>CRUD com HTMX</h1>
+    <h1>Bem-vindo ao Sistema ERP</h1>
 
-<form action="/users" method="POST">
-    <input type="text" name="name" placeholder="Nome do usuário" required>
-    <button type="submit">Cadastrar</button>
-</form>
+    <!-- Botões para acessar as páginas -->
+    <button onclick="window.location.href='assets/clientes.html'">Clientes</button>
+    <button hx-get="/produtos.html" hx-trigger="click" hx-target="#content">Produtos</button>
+    <button hx-get="/pedidos.html" hx-trigger="click" hx-target="#content">Pedidos</button>
 
-    <!-- Lista de usuários -->
-    <div id="user-list">
-        <!-- Usuários serão listados aqui -->
-    </div>
+    <!-- Área para carregar as páginas -->
+    <div id="content"></div>
 
-    <!-- Script para exibir a lista de usuários -->
-    <script>
-        // Carregar a lista de usuários na inicialização
-        window.onload = function() {
-            fetch('/users')
-                .then(response => response.json())
-                .then(data => {
-                    const userListDiv = document.getElementById('user-list');
-                    data.forEach(user => {
-                        const userDiv = document.createElement('div');
-                        userDiv.textContent = `${user.name}`;
-                        userListDiv.appendChild(userDiv);
-                    });
-                });
-        }
-    </script>
 </body>
 </html>
 
