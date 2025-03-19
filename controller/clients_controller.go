@@ -5,38 +5,39 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/Hakeera/crud/model"
 	"github.com/Hakeera/crud/service"
 	"github.com/gin-gonic/gin"
 )
 
 // Função para criar um cliente
 func CreateClient(c *gin.Context) {
-    var client service.ClientDTO
+    var client model.Client
 
-    fmt.Println("🔵 Recebendo requisição para criar cliente...")
-
+    // Decodifica os dados do formulário 
     if err := c.ShouldBind(&client); err != nil {
-        fmt.Println("🛑 Erro ao processar a requisição:", err)
-        c.JSON(http.StatusBadRequest, gin.H{"error": "Erro ao processar a requisição"})
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Dados inválidos", "details": err.Error()})
         return
     }
 
-    fmt.Println("✅ Cliente recebido:", client)
-    
-    _, err := service.CreateClientService(client)
+    fmt.Printf("✅ Cliente recebido: %+v\n", client)
+
+    // Criar o cliente no banco de dados
+    _, err := service.CreateClientService(service.ClientDTO{
+        Name:    client.Name,
+        Email:   client.Email,
+        Phone:   client.Phone,
+        Address: client.Address,
+    })
     if err != nil {
-        fmt.Println("🛑 Erro ao criar cliente:", err)
-        c.JSON(http.StatusInternalServerError, gin.H{"error": "Erro ao criar cliente"})
+        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
         return
     }
 
-    clients, err := service.GetClientsService()
-    if err != nil {
-        fmt.Println("🛑 Erro ao buscar clientes:", err)
-        c.JSON(http.StatusInternalServerError, gin.H{"error": "Erro ao buscar clientes"})
-        return
-    }
+    // Obter a lista completa de clientes
+    clients, _ := service.GetClientsService()
 
+    // Retornar o HTML atualizado com a lista de clientes
     c.HTML(http.StatusOK, "clientes-list.html", gin.H{"clients": clients})
 }
 
@@ -91,15 +92,17 @@ func DeleteClient(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"message": "Cliente deletado com sucesso"})
 }
-
-// Função para obter todos os clientes
 func GetClients(c *gin.Context) {
-	clients, err := service.GetClientsService()
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erro ao buscar clientes"})
-		return
-	}
+    clients, err := service.GetClientsService()
+    if err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": "Erro ao buscar clientes"})
+        return
+    }
 
-	// Retorna os clientes como resposta
-	c.JSON(http.StatusOK, clients)
+    fmt.Println("🚀 Enviando para o template:", clients) // Debug
+
+    // Teste renderizando diretamente um HTML básico
+    c.HTML(http.StatusOK, "clientes-list.html", gin.H{
+        "clients": clients,
+    })
 }

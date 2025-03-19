@@ -12,6 +12,7 @@ func ClientRoutes(r *gin.Engine) {
 
 	// Rota para listar clientes
 	r.GET("/clients", controller.GetClients)
+	r.GET("/clients-page", controller.RenderClientsPage)
 
 	// Rota para atualizar um cliente
 	r.PUT("/clients/:id", controller.UpdateClient)

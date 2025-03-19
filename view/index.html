@@ -10,7 +10,7 @@
     <h1>Bem-vindo ao Sistema ERP</h1>
 
     <!-- Botões para acessar as páginas -->
-    <button onclick="window.location.href='assets/clientes.html'">Clientes</button>
+    <button hx-get="/clients-page" hx-target="#content" class="btn btn-primary">Clientes</button>
     <button hx-get="/produtos.html" hx-trigger="click" hx-target="#content">Produtos</button>
     <button hx-get="/pedidos.html" hx-trigger="click" hx-target="#content">Pedidos</button>
 

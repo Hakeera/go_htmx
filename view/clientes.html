@@ -2,31 +2,29 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciamento de Clientes</title>
-    <script src="https://unpkg.com/htmx.org@1.7.0"></script> <!-- HTMX -->
+    <title>Clientes</title>
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
 </head>
 <body>
     <h1>Gerenciamento de Clientes</h1>
 
-<form hx-post="/clients" 
-      hx-trigger="submit"
-      hx-target="#client-list"
-      hx-swap="outerHTML">
-    
-    <input type="text" name="name" placeholder="Nome" required>
-    <input type="email" name="email" placeholder="E-mail" required>
-    <input type="text" name="phone" placeholder="Telefone" required>
-    <input type="text" name="address" placeholder="Endereço" required>
-    
-    <button type="submit">Cadastrar Cliente</button>
-</form>
+    <!-- Formulário para cadastrar cliente -->
+    <form hx-post="/clients" hx-target="#clientes-list" hx-swap="outerHTML">
+        <input type="text" name="name" placeholder="Nome" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="phone" placeholder="Telefone" required>
+        <input type="text" name="address" placeholder="Endereço" required>
+        <button type="submit">Cadastrar</button>
+    </form>
 
-<div id="client-list">
-    <!-- Aqui será atualizado com os clientes -->
-</div>
+    <!-- Div para a lista de clientes -->
+    <div id="clientes-list">
+	    {{ template "clientes-list.html" . }}
+    </div>
 
-<!-- Scripts necessários -->
+</body>
+</html>
+
 <script src="https://unpkg.com/htmx.org@1.7.0"></script>
 <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
 

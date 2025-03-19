@@ -1,0 +1,49 @@
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /static/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
+[GIN-debug] HEAD   /static/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
+[GIN-debug] Loaded HTML Templates (5): 
+	- 
+	- clientes-list.html
+	- clientes.html
+	- index.html
+	- user_item.html
+
+✅ Templates carregados com sucesso!
+[GIN-debug] GET    /                         --> github.com/Hakeera/crud/routes.SetupRoutes.func1 (3 handlers)
+[GIN-debug] GET    /clients-page             --> github.com/Hakeera/crud/controller.RenderClientsPage (3 handlers)
+[GIN-debug] POST   /users                    --> github.com/Hakeera/crud/controller.CreateUser (3 handlers)
+[GIN-debug] GET    /users                    --> github.com/Hakeera/crud/controller.GetUsers (3 handlers)
+[GIN-debug] PUT    /users/:id                --> github.com/Hakeera/crud/controller.UpdateUser (3 handlers)
+[GIN-debug] DELETE /users/:id                --> github.com/Hakeera/crud/controller.DeleteUser (3 handlers)
+[GIN-debug] POST   /clients                  --> github.com/Hakeera/crud/controller.CreateClient (3 handlers)
+[GIN-debug] GET    /clients                  --> github.com/Hakeera/crud/controller.GetClients (3 handlers)
+[GIN-debug] GET    /clients-page             --> github.com/Hakeera/crud/controller.RenderClientsPage (3 handlers)
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /static/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
+[GIN-debug] HEAD   /static/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
+[GIN-debug] Loaded HTML Templates (5): 
+	- clientes-list.html
+	- clientes.html
+	- index.html
+	- user_item.html
+	- 
+
+✅ Templates carregados com sucesso!
+[GIN-debug] GET    /                         --> github.com/Hakeera/crud/routes.SetupRoutes.func1 (3 handlers)
+[GIN-debug] GET    /clients                  --> github.com/Hakeera/crud/controller.RenderClientsPage (3 handlers)
+[GIN-debug] POST   /users                    --> github.com/Hakeera/crud/controller.CreateUser (3 handlers)
+[GIN-debug] GET    /users                    --> github.com/Hakeera/crud/controller.GetUsers (3 handlers)
+[GIN-debug] PUT    /users/:id                --> github.com/Hakeera/crud/controller.UpdateUser (3 handlers)
+[GIN-debug] DELETE /users/:id                --> github.com/Hakeera/crud/controller.DeleteUser (3 handlers)
+[GIN-debug] POST   /clients                  --> github.com/Hakeera/crud/controller.CreateClient (3 handlers)
+[GIN-debug] GET    /clients                  --> github.com/Hakeera/crud/controller.GetClients (3 handlers)

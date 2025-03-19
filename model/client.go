@@ -57,6 +57,9 @@ func GetClients() ([]Client, error) {
 		return nil, fmt.Errorf("erro ao iterar sobre resultados: %v", err)
 	}
 
+	// Debug para verificar se os clientes foram buscados corretamente
+	fmt.Println("📢 Clientes encontrados no banco de dados:", clients)
+
 	return clients, nil
 }
 

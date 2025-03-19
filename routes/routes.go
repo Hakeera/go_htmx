@@ -1,6 +1,8 @@
 package routes
 
 import (
+	"fmt"
+
 	"github.com/Hakeera/crud/controller"
 	"github.com/gin-gonic/gin"
 )
@@ -14,6 +16,8 @@ func SetupRoutes() *gin.Engine {
 
 	// Carregar templates HTML
 	r.LoadHTMLGlob("view/*.html")
+	fmt.Println("✅ Templates carregados com sucesso!")
+
 
 	// Rota para a página inicial
 	r.GET("/", func(c *gin.Context) {
